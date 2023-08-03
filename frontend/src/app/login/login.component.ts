@@ -21,9 +21,10 @@ export class LoginComponent {
       password: this.password
     };
 
+
     this.http.post('http://localhost:4000/user/login', bodyData).subscribe((resultData: any)=>{
       if(resultData.status){
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/profile');
       }else{
         alert('Incorrect Email or Password');
       }
