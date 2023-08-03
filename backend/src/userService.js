@@ -1,7 +1,7 @@
 var userModel = require('./userModel');
 var key = 'mystudentsaretalented';
 var encryptor = require('simple-encryptor')(key);
-
+//save user
 module.exports.saveUserInfoService = (userDetails) => {
     return new Promise(function saveUserInfoFun(resolve, reject){
         var userModelData = new userModel();
