@@ -10,8 +10,10 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EditComponent } from './edit/edit.component';
+import { SurveyComponent } from './survey/survey.component';
 import { HeaderComponent } from './partials/header/header.component';
 import { FooterComponent } from './partials/footer/footer.component';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { FooterComponent } from './partials/footer/footer.component';
     LoginComponent,
     HomeComponent,
     ProfileComponent,
-    EditComponent
+    EditComponent,
+    SurveyComponent
   ],
   imports: [
     BrowserModule,
