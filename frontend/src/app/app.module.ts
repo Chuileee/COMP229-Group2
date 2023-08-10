@@ -12,6 +12,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { EditComponent } from './edit/edit.component';
 import { HeaderComponent } from './partials/header/header.component';
 import { FooterComponent } from './partials/footer/footer.component';
+import { SurveyListComponent } from './survey-list/survey-list.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FooterComponent } from './partials/footer/footer.component';
     LoginComponent,
     HomeComponent,
     ProfileComponent,
-    EditComponent
+    EditComponent,
+    SurveyListComponent
   ],
   imports: [
     BrowserModule,
