@@ -1,6 +1,6 @@
 <app-header></app-header>
 <div class="content-wrapper">
-    <h1>Survey Creator</h1>
+    <br><h1>Survey Creator</h1>
   
     <!-- Navigation for logged-in users -->
     <nav *ngIf="isLoggedIn"> 
@@ -13,7 +13,7 @@
   
     <!-- Navigation for anonymous users -->
     <nav *ngIf="!isLoggedIn"> 
-      <a routerLink="/login">Login</a>
+      <a routerLink="/login">Login</a><br>
       <a routerLink="/register">Register</a>
     </nav>
   
