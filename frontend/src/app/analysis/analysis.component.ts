@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-survey',
-  templateUrl: './survey.component.html',
-  styleUrls: ['./survey.component.css']
+  selector: 'app-analysis',
+  templateUrl: './analysis.component.html',
+  styleUrls: ['./analysis.component.css']
 })
-export class SurveyComponent {
+export class AnalysisComponent {
   surveyName: string = '';
   questions: { text: string; questiontype: string; options?: string[] }[] = [];
-  startDate: string = ''; // Add this property
-  endDate: string = '';   // Add this property
+  startDate: string = '';
+  endDate: string = '';
 
   ngOnInit() {
     this.addQuestion();

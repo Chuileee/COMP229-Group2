@@ -25,7 +25,8 @@ import { FooterComponent } from './partials/footer/footer.component';
     HomeComponent,
     ProfileComponent,
     EditComponent,
-    SurveyComponent
+    SurveyComponent,
+    AnalysisComponent
   ],
   imports: [
     BrowserModule,
