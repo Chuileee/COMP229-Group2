@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EditComponent } from './edit/edit.component';
+import { SurveyComponent } from './survey/survey.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { EditComponent } from './edit/edit.component';
     LoginComponent,
     HomeComponent,
     ProfileComponent,
-    EditComponent
+    EditComponent,
+    SurveyComponent
   ],
   imports: [
     BrowserModule,

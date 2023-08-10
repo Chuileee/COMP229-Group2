@@ -19,6 +19,10 @@ export class ProfileComponent {
     this.router.navigate(['/edit']);
     }
 
+  createSurvey() {
+    this.router.navigate(['/survey']);
+  }
+
   logout(){
     this.router.navigate(['/login']);
   }
