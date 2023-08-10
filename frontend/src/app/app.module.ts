@@ -13,7 +13,9 @@ import { EditComponent } from './edit/edit.component';
 import { SurveyComponent } from './survey/survey.component';
 import { HeaderComponent } from './partials/header/header.component';
 import { FooterComponent } from './partials/footer/footer.component';
+import { AnalysisComponent } from './analysis/analysis.component';
 import { SurveyListComponent } from './survey-list/survey-list.component';
+
 
 
 @NgModule({
