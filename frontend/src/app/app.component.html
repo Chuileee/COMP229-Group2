@@ -1,21 +1,25 @@
-<h1>Survey Creator</h1>
-
-<!-- Navigation for logged-in users -->
-<nav *ngIf="isLoggedIn"> 
-  <a routerLink="/create-survey">Create a Survey</a> |
-  <a routerLink="/my-surveys">My Surveys</a> |
-  <a routerLink="/reporting">Survey Reports</a> |
-  <a routerLink="/profile">Profile</a> |
-  <a href="/logout">Logout</a>
-</nav>
-
-<!-- Navigation for anonymous users -->
-<nav *ngIf="!isLoggedIn"> 
-  <a routerLink="/login">Login</a>
-  <a routerLink="/register">Register</a>
-</nav>
-
-<!-- Main content where routed components will display -->
-<router-outlet></router-outlet>
-
-<app-footer></app-footer>
+<app-header></app-header>
+<div class="content-wrapper">
+    <h1>Survey Creator</h1>
+  
+    <!-- Navigation for logged-in users -->
+    <nav *ngIf="isLoggedIn"> 
+      <a routerLink="/create-survey">Create a Survey</a> |
+      <a routerLink="/my-surveys">My Surveys</a> |
+      <a routerLink="/reporting">Survey Reports</a> |
+      <a routerLink="/profile">Profile</a> |
+      <a href="/logout">Logout</a>
+    </nav>
+  
+    <!-- Navigation for anonymous users -->
+    <nav *ngIf="!isLoggedIn"> 
+      <a routerLink="/login">Login</a>
+      <a routerLink="/register">Register</a>
+    </nav>
+  
+    <!-- Main content where routed components will display -->
+    <router-outlet></router-outlet>
+  </div>
+  
+  <app-footer></app-footer>
+  
