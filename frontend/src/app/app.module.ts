@@ -10,9 +10,11 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EditComponent } from './edit/edit.component';
+import { SurveyComponent } from './survey/survey.component';
 import { HeaderComponent } from './partials/header/header.component';
 import { FooterComponent } from './partials/footer/footer.component';
 import { SurveyListComponent } from './survey-list/survey-list.component';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +26,11 @@ import { SurveyListComponent } from './survey-list/survey-list.component';
     HomeComponent,
     ProfileComponent,
     EditComponent,
+
     SurveyListComponent
+
+    SurveyComponent
+
   ],
   imports: [
     BrowserModule,
