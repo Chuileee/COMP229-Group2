@@ -1,37 +1,10 @@
-<div class="container mt-5">
-  <h2>Create Survey</h2>
-  <form (ngSubmit)="createSurvey()">
-    <br>
-    <div class="form-group">
-      <label for="startDate">Start Date</label>
-      <input type="date" class="form-control" id="startDate" [(ngModel)]="startDate" name="startDate" required>
-    </div>
-    <br>
-    <div class="form-group">
-      <label for="endDate">End Date</label>
-      <input type="date" class="form-control" id="endDate" [(ngModel)]="endDate" name="endDate" required>
-    </div><br>
-    <hr>
-    <div class="form-group" *ngFor="let question of questions; let i = index;"><br>
-      <label for="question{{ i }}">Question {{ i + 1 }}</label>
-      <input type="text" class="form-control" [id]="'question' + i" [(ngModel)]="questions[i].text" [name]="'question' + i" required>
-      <br>
-      <label for="questiontype{{ i }}">Question Type</label>
-      <select class="form-control" [id]="'questiontype' + i" [(ngModel)]="questions[i].questiontype" [name]="'questiontype' + i" required>
-        <option value="multipleChoice">Multiple Choice</option>
-        <option value="agreeDisagree">Agree/Disagree</option>
-      </select>
-      <br>
-      <div *ngIf="questions[i].questiontype === 'multipleChoice'">
-        <label for="options{{ i }}">Options</label>
-        <input type="text" class="form-control" [id]="'options' + i" [(ngModel)]="questions[i].options" [name]="'options' + i" required>
-        <small class="form-text text-muted">Enter options separated by commas.</small><br><br>
-        <hr>
-      </div>
-    </div>
-
-    <br>
-    <button type="button" (click)="addQuestion()" class="btn btn-secondary">Add Question</button>
-    <button type="submit" class="btn btn-primary">Create Survey</button>
-  </form>
+<div class="container">
+  <h2>Survey Analysis</h2>
+  <p>Number of Respondents: {{ numberOfRespondents }}</p>
+  <div *ngFor="let question of questions; let i = index;">
+    <h3>Question {{ i + 1 }}: {{ question.text }}</h3>
+    <!-- Display answer statistics here -->
+  </div>
+  <button (click)="exportToExcel()">Export to Excel</button>
+  <button (click)="exportViaEmail()">Export via Email</button>
 </div>

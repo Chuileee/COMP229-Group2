@@ -1,28 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SurveyService } from './survey.service'; // Check the correct path here
 
 @Component({
   selector: 'app-analysis',
   templateUrl: './analysis.component.html',
   styleUrls: ['./analysis.component.css']
 })
-export class AnalysisComponent {
-  surveyName: string = '';
-  questions: { text: string; questiontype: string; options?: string[] }[] = [];
-  startDate: string = '';
-  endDate: string = '';
+export class AnalysisComponent implements OnInit {
+  numberOfRespondents: number = 0; // Initialize with a default value
+  questions: any[] = []; // Initialize with an empty array
 
-  ngOnInit() {
-    this.addQuestion();
+  constructor(private surveyService: SurveyService) { }
+
+  ngOnInit(): void {
+    // Fetch analysis data for a specific survey using surveyService
+    // For example:
+    const surveyId = 'your-survey-id';
+    this.surveyService.getSurveyStatistics(surveyId).subscribe(
+      (statistics: any) => {
+        this.numberOfRespondents = statistics.numberOfRespondents;
+        this.questions = statistics.questions;
+      },
+      (error: any) => {
+        console.error('Error fetching analysis data:', error);
+      }
+    );
   }
 
-  addQuestion() {
-    this.questions.push({ text: '', questiontype: 'multipleChoice', options: ['', '', '', ''] });
+  exportToExcel() {
+    // Implement export to Excel using xlsx or other libraries
   }
 
-  createSurvey() {
-    console.log(this.surveyName);
-    console.log(this.questions);
-    console.log(this.startDate);
-    console.log(this.endDate);
+  exportViaEmail() {
+    // Implement export via email using email service or default client
   }
 }
