@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'front-end';
+  title = 'Survey Creator';
+  
+  // Add this line for isLoggedIn property:
+  isLoggedIn = false; // Initially set to false; change it based on your authentication logic
 }
+

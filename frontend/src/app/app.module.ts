@@ -11,9 +11,14 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EditComponent } from './edit/edit.component';
 import { SurveyComponent } from './survey/survey.component';
+import { HeaderComponent } from './partials/header/header.component';
+import { FooterComponent } from './partials/footer/footer.component';
+
 
 @NgModule({
   declarations: [
+    HeaderComponent,
+    FooterComponent,
     AppComponent,
     RegisterComponent,
     LoginComponent,
