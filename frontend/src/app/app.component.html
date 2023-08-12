@@ -1,25 +1,46 @@
 <app-header></app-header>
+
 <div class="content-wrapper">
     <br><h1>Survey Creator</h1>
   
+    <div class="text-center mt-5">
+        <h1>Welcome to Survey Creator</h1>
+        <p>Engage, understand and make decisions with ease.</p>
+    </div>
+
     <!-- Navigation for logged-in users -->
-    <nav *ngIf="isLoggedIn"> 
-      <a routerLink="/create-survey">Create a Survey</a> |
-      <a routerLink="/my-surveys">My Surveys</a> |
-      <a routerLink="/reporting">Survey Reports</a> |
-      <a routerLink="/profile">Profile</a> |
-      <a href="/logout">Logout</a>
-    </nav>
-  
+    <div class="user-navigation mt-4" *ngIf="isLoggedIn">
+        <h4>Hello, User!</h4>
+        <p>What would you like to do today?</p>
+        <div class="d-flex justify-content-center">
+            <a class="btn btn-primary m-2" routerLink="/create-survey">Create a Survey</a>
+            <a class="btn btn-secondary m-2" routerLink="/my-surveys">My Surveys</a>
+            <a class="btn btn-info m-2" routerLink="/reporting">Survey Reports</a>
+            <a class="btn btn-dark m-2" routerLink="/profile">Profile</a>
+            <a class="btn btn-danger m-2" href="/logout">Logout</a>
+        </div>
+    </div>
+
     <!-- Navigation for anonymous users -->
     <nav *ngIf="!isLoggedIn"> 
       <a routerLink="/login">Login</a><br>
       <a routerLink="/register">Register</a>
     </nav>
   
+    <div class="guest-navigation mt-4 text-center" *ngIf="!isLoggedIn">
+        <h4>New here?</h4>
+        <p>Join us to create your own surveys or respond to existing ones.</p>
+        <div>
+            <a class="btn btn-primary m-2" routerLink="/login">Login</a>
+            <a class="btn btn-secondary m-2" routerLink="/register">Register</a>
+            <a class="btn btn-info m-2" routerLink="/active-surveys">Respond to a Survey</a>
+        </div>
+    </div>
+
     <!-- Main content where routed components will display -->
-    <router-outlet></router-outlet>
-  </div>
-  
-  <app-footer></app-footer>
-  
+    <div class="mt-5">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
+<app-footer></app-footer>
