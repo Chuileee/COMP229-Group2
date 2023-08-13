@@ -20,30 +20,39 @@
             <!-- If the question type is multipleChoice, display options as radio buttons -->
             <div *ngIf="question.questiontype === 'multipleChoice'">
               <div class="form-check" *ngFor="let option of question.options">
-                <input class="form-check-input" type="radio" name="{{ question.text }}" id="{{ option }}" value="{{ option }}">
+                <input class="form-check-input" type="radio" 
+                       name="{{ question.text }}" id="{{ option }}" 
+                       value="{{ option }}" 
+                       [(ngModel)]="responses[question.text]">
                 <label class="form-check-label" for="{{ option }}">
                   {{ option }}
                 </label>
               </div>
             </div>
+            
   
             <!-- If the question type is agreeDisagree, display options as radio buttons -->
             <div *ngIf="question.questiontype === 'agreeDisagree'">
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="{{ question.text }}" id="agree" value="Agree">
+                <input class="form-check-input" type="radio" 
+                       name="{{ question.text }}" id="agree" 
+                       value="Agree"
+                       [(ngModel)]="responses[question.text]">
                 <label class="form-check-label" for="agree">
                   Agree
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="{{ question.text }}" id="disagree" value="Disagree">
+                <input class="form-check-input" type="radio" 
+                       name="{{ question.text }}" id="disagree" 
+                       value="Disagree"
+                       [(ngModel)]="responses[question.text]">
                 <label class="form-check-label" for="disagree">
                   Disagree
                 </label>
               </div>
             </div>
-  
-          </div>
+            
   
           <!-- Submit button to submit responses -->
           <button class="btn btn-primary mt-4" (click)="submitResponses()">Submit Responses</button>
@@ -57,4 +66,7 @@
       <p>Loading survey...</p>
     </div>
   </div>
+
+  <pre>{{ responses | json }}</pre>
+
   

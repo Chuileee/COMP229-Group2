@@ -11,7 +11,7 @@ import { SurveyService } from '../survey.service';
 export class SurveyResponseComponent implements OnInit {
 
   survey: Survey | null = null; // Initialize with null. You'll need to fetch the survey data later.
-
+  responses: any = {};
   constructor(
     private route: ActivatedRoute,   // Inject ActivatedRoute
     private surveyService: SurveyService // Inject your SurveyService
@@ -31,8 +31,12 @@ export class SurveyResponseComponent implements OnInit {
     }
     
 
-  submitResponses(): void {
-    // Implement logic to gather responses and send to your backend.
-    alert('Responses submitted!'); // For now, just a placeholder to see if the method gets called.
-  }
+    submitResponses(): void {
+      console.log(this.responses); // For debugging, you should see all user responses
+    
+      // Now, you can send 'this.responses' to your backend or handle as needed.
+      
+      alert('Responses submitted!'); 
+    }
+    
 }

@@ -10,43 +10,58 @@ import { SurveyService } from '../survey.service';
 })
 export class SurveyComponent {
   survey: Survey = {
-    _id: '',  // Initialize with an empty string or some default value
+    _id: '',  
     surveyName: '',
     questions: [],
     startDate: '',
     endDate: ''
   };
-  
+
+  constructor(private surveyService: SurveyService, private router: Router) {}
 
   ngOnInit() {
     this.addQuestion();
   }
 
   addQuestion() {
-    this.survey.questions.push({ text: '', questiontype: 'multipleChoice', options: ['', '', '', ''] });
+    const newQuestion: Question = {
+      text: '',
+      questiontype: 'multipleChoice',
+      options: [],
+      optionsString: ''
+    }
+    this.survey.questions.push(newQuestion);
   }
 
-  constructor(private surveyService: SurveyService, private router: Router) {}
+  // Convert comma-separated string to options array
+  setOptionsFromString(optionString: string): string[] {
+    return optionString.split(',').map(option => option.trim());
+  }
 
+  // Create and save the survey
   createSurvey() {
+    this.survey.questions.forEach(question => {
+      if (question.questiontype === 'multipleChoice' && question.optionsString) {
+        question.options = this.setOptionsFromString(question.optionsString);
+      }
+    });
+
     const newSurvey: Survey = {
       _id: '',
       surveyName: this.survey.surveyName,
       questions: this.survey.questions,
       startDate: this.survey.startDate,
-      endDate: this.survey.endDate 
-  
-};
-this.surveyService.saveSurvey(newSurvey).subscribe(
-  response => {
-    // Handle the response from the server here. For instance:
-    console.log('Survey saved:', response);
-    this.router.navigateByUrl('/survey-list');  // Navigate after saving.
-  },
-  error => {
-    // Handle errors here
-    console.error('Error saving survey:', error);
+      endDate: this.survey.endDate
+    };
+
+    this.surveyService.saveSurvey(newSurvey).subscribe(
+      response => {
+        console.log('Survey saved:', response);
+        this.router.navigateByUrl('/survey-list');  // Navigate after saving.
+      },
+      error => {
+        console.error('Error saving survey:', error);
+      }
+    );
   }
-);
-}
 }

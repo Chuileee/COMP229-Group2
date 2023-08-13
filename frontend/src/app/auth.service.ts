@@ -16,13 +16,19 @@ export class AuthService {
   login(email: string, username: string): void {
     this.isLogin = true;
     this.currentUser = { email: email, username: username };
+    localStorage.setItem('username', username);
+    localStorage.setItem('email', email);
   }
+  
 
   logout(): void {
     this.isLogin = false;
     this.currentUser = null;
+    localStorage.removeItem('username');
+    localStorage.removeItem('email');
     this.router.navigate(['/login']);
   }
+  
 
   isLoggedIn(): boolean {
     return this.isLogin;
