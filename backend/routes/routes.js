@@ -30,5 +30,6 @@ router.post('/saveSurvey', async (req, res) => {
     }
 });
 
+router.get('/allSurveys', surveyController.getAllSurveysController);
 
 module.exports = router;

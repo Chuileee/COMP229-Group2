@@ -19,3 +19,17 @@ module.exports.saveSurveyService = (surveyDetails) => {
 }
 
 // Add more functions as required, e.g., to fetch all surveys, get a survey by ID, etc.
+module.exports.getAllSurveysService = () => {
+    return new Promise((resolve, reject) => {
+        surveyModel.find({}, (error, surveys) => {
+            if (error) {
+                console.error("Error fetching all surveys:", error.message);
+                reject(error);
+            } else {
+                console.log("Fetched all surveys successfully.");
+                resolve(surveys);
+            }
+        });
+    });
+};
+

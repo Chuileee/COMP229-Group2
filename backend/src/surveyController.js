@@ -18,5 +18,15 @@ var saveSurveyController = async(req, res) => {
 }
 
 // Add more functions as required, e.g., to handle requests to fetch all surveys, get a survey by ID, etc.
+var getAllSurveysController = async(req, res) => {
+    try {
+        const surveys = await surveyService.getAllSurveysService();
+        res.status(200).send(surveys);
+    } catch (error) {
+        res.status(500).send({ message: 'Error fetching all surveys', error: error.message });
+    }
+}
 
-module.exports = { saveSurveyController /*, other exported functions */ }
+
+module.exports = { saveSurveyController, getAllSurveysController };
+
