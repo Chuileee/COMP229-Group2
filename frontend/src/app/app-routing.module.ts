@@ -19,7 +19,7 @@ const routes: Routes = [
   {path:'survey', component:SurveyComponent},
   {path:'survey-list', component:SurveyListComponent},
   {path:'analysis', component:AnalysisComponent},
-  {path: 'respond/:id', component: SurveyResponseComponent }
+  {path:'respond/:id', component: SurveyResponseComponent }
 ];
 
 @NgModule({

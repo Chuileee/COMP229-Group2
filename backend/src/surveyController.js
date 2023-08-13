@@ -3,6 +3,12 @@ var surveyService = require('./surveyService');
 var saveSurveyController = async(req, res) => {
     console.log("saveSurveyController called!");
     
+    // Check if _id is an empty string and remove it
+    if (req.body._id === "") {
+        console.log("Removing empty _id");
+        delete req.body._id;
+    }
+    
     try{
         var status = await surveyService.saveSurveyService(req.body);
 
@@ -13,9 +19,11 @@ var saveSurveyController = async(req, res) => {
         }
     }catch(error){
         console.log(error);
+        res.send({"status": false, message: "Exception occurred while saving survey."});  // Added this line to ensure a response is sent to the client even on exceptions
     }
     console.log("Received survey data:", req.body);
 }
+
 
 // Add more functions as required, e.g., to handle requests to fetch all surveys, get a survey by ID, etc.
 var getAllSurveysController = async(req, res) => {

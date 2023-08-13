@@ -13,20 +13,21 @@ export class SurveyService {
   // Endpoint base URL
   private baseUrl: string = 'http://localhost:4000';
 
-  // Save a survey
-  saveSurvey(survey: Survey) {
-    // Endpoint where your backend server is running
-    const endpoint = 'http://localhost:4000/saveSurvey';
-    // Use the HTTP client to send the survey data as a POST request to your backend server
-    return this.http.post(endpoint, survey);
+// Save a survey
+saveSurvey(survey: Survey) {
+  // Endpoint where your backend server is running
+  const endpoint = `${this.baseUrl}/survey`;
+  // Use the HTTP client to send the survey data as a POST request to your backend server
+  return this.http.post(endpoint, survey);
 }
+
 
   // Fetch all surveys from the backend
   getAllSurveys(): Observable<Survey[]> {
     const endpoint = `${this.baseUrl}/allSurveys`;
     return this.http.get<Survey[]>(endpoint);
   }
-  
+
   // Fetch a specific survey by its _id
   getSurveyById(id: string): Observable<Survey> {
     const endpoint = `${this.baseUrl}/survey/${id}`;
