@@ -21,11 +21,7 @@
         </div>
     </div>
 
-    <!-- Navigation for anonymous users -->
-    <nav *ngIf="!isLoggedIn"> 
-      <a routerLink="/login">Login</a><br>
-      <a routerLink="/register">Register</a>
-    </nav>
+
   
     <div class="guest-navigation mt-4 text-center" *ngIf="!isLoggedIn">
         <h4>New here?</h4>
