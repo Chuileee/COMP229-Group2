@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
@@ -28,7 +27,7 @@ import { SurveyListComponent } from './survey-list/survey-list.component';
     HomeComponent,
     ProfileComponent,
     EditComponent,
-
+    SurveyListComponent,
     SurveyComponent,
     AnalysisComponent
     SurveyListComponent
