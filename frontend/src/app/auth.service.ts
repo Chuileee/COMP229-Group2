@@ -9,14 +9,13 @@ export class AuthService {
   isLogin: boolean = false;
 
   // Store the user data (adjust the type if necessary)
-  private currentUser: { userId: string, username: string } | null = null;
+  private currentUser: { email: string, username: string } | null = null;
 
   constructor(private router: Router) {}
 
-  // Simulate a login by setting user data
-  login(userId: string, username: string): void {
+  login(email: string, username: string): void {
     this.isLogin = true;
-    this.currentUser = { userId: userId, username: username };
+    this.currentUser = { email: email, username: username };
   }
 
   logout(): void {
@@ -25,8 +24,14 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
+  isLoggedIn(): boolean {
+    return this.isLogin;
+  }
 
   getUsername(): string | null {
     return this.currentUser?.username || null;
+  }
+  getEmail(): string | null {
+    return this.currentUser?.email || null;
   }
 }
