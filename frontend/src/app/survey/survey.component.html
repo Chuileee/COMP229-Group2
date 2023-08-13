@@ -9,6 +9,9 @@
     </div>
 
     <!-- Start and End date input fields -->
+
+    <br>
+
     <div class="form-group">
       <label for="startDate">Start Date</label>
       <input type="date" class="form-control" id="startDate" [(ngModel)]="startDate" name="startDate" required>
@@ -22,6 +25,13 @@
     <!-- Questions -->
     <div class="form-group" *ngFor="let question of questions; let i = index;">
       <br>
+    <br>
+    <div class="form-group">
+      <label for="endDate">End Date</label>
+      <input type="date" class="form-control" id="endDate" [(ngModel)]="endDate" name="endDate" required>
+    </div><br>
+    <hr>
+    <div class="form-group" *ngFor="let question of questions; let i = index;"><br>
       <label for="question{{ i }}">Question {{ i + 1 }}</label>
       <input type="text" class="form-control" [id]="'question' + i" [(ngModel)]="question.text" [name]="'question' + i" required>
       <br>

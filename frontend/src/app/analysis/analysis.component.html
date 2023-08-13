@@ -1,0 +1,10 @@
+<div class="container">
+  <h2>Survey Analysis</h2>
+  <p>Number of Respondents: {{ numberOfRespondents }}</p>
+  <div *ngFor="let question of questions; let i = index;">
+    <h3>Question {{ i + 1 }}: {{ question.text }}</h3>
+    <!-- Display answer statistics here -->
+  </div>
+  <button (click)="exportToExcel()">Export to Excel</button>
+  <button (click)="exportViaEmail()">Export via Email</button>
+</div>

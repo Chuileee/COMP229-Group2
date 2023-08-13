@@ -13,6 +13,9 @@ export class SurveyComponent implements Survey {
   questions: Question[] = [];
   startDate: string = '';
   endDate: string = '';
+  questions: { text: string; questiontype: string; options?: string[] }[] = [];
+  startDate: string = ''; // Add this property
+  endDate: string = '';   // Add this property
 
   ngOnInit() {
     this.addQuestion();
