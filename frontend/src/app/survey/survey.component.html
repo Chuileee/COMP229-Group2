@@ -2,19 +2,38 @@
   <h2>Create Survey</h2>
   <form (ngSubmit)="createSurvey()">
 
-    <div class="form-group" *ngFor="let question of questions; let i = index;"><br>
+    <!-- Survey Name input field -->
+    <div class="form-group">
+      <label for="surveyName">Survey Name</label>
+      <input type="text" class="form-control" id="surveyName" [(ngModel)]="surveyName" name="surveyName" required>
+    </div>
+
+    <!-- Start and End date input fields -->
+    <div class="form-group">
+      <label for="startDate">Start Date</label>
+      <input type="date" class="form-control" id="startDate" [(ngModel)]="startDate" name="startDate" required>
+    </div>
+
+    <div class="form-group">
+      <label for="endDate">End Date</label>
+      <input type="date" class="form-control" id="endDate" [(ngModel)]="endDate" name="endDate" required>
+    </div>
+
+    <!-- Questions -->
+    <div class="form-group" *ngFor="let question of questions; let i = index;">
+      <br>
       <label for="question{{ i }}">Question {{ i + 1 }}</label>
-      <input type="text" class="form-control" [id]="'question' + i" [(ngModel)]="questions[i].text" [name]="'question' + i" required>
+      <input type="text" class="form-control" [id]="'question' + i" [(ngModel)]="question.text" [name]="'question' + i" required>
       <br>
       <label for="questiontype{{ i }}">Question Type</label>
-      <select class="form-control" [id]="'questiontype' + i" [(ngModel)]="questions[i].questiontype" [name]="'questiontype' + i" required>
+      <select class="form-control" [id]="'questiontype' + i" [(ngModel)]="question.questiontype" [name]="'questiontype' + i" required>
         <option value="multipleChoice">Multiple Choice</option>
         <option value="agreeDisagree">Agree/Disagree</option>
       </select>
       <br>
-      <div *ngIf="questions[i].questiontype === 'multipleChoice'">
+      <div *ngIf="question.questiontype === 'multipleChoice'">
         <label for="options{{ i }}">Options</label>
-        <input type="text" class="form-control" [id]="'options' + i" [(ngModel)]="questions[i].options" [name]="'options' + i" required>
+        <input type="text" class="form-control" [id]="'options' + i" [(ngModel)]="question.options" [name]="'options' + i" required>
         <small class="form-text text-muted">Enter options separated by commas.</small><br><br>
         <hr>
       </div>

@@ -1,22 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Survey } from './survey/survey.model';  // Adjust the path to your Survey model
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class SurveyService {
 
-  private surveys: Survey[] = [];  // This array will act as our database for surveys for this example
-
-  constructor() {}
+  constructor(private http: HttpClient) {}
+  
+  // Endpoint base URL
+  private baseUrl: string = 'http://localhost:4000';
 
   // Save a survey
-  saveSurvey(survey: Survey) {
-    this.surveys.push(survey);
+  saveSurvey(survey: Survey): Observable<any> {
+    const endpoint = `${this.baseUrl}/saveSurvey`;
+    return this.http.post(endpoint, survey);
   }
 
-  // Get all surveys
-  getAllSurveys(): Survey[] {
-    return this.surveys;
+  // Fetch all surveys from the backend
+  getAllSurveys(): Observable<Survey[]> {
+    const endpoint = `${this.baseUrl}/allSurveys`;
+    return this.http.get<Survey[]>(endpoint);
   }
-}
+  }

@@ -14,6 +14,8 @@ export class SurveyListComponent implements OnInit {
   constructor(private surveyService: SurveyService) {}
 
   ngOnInit(): void {
-    this.surveys = this.surveyService.getAllSurveys();
+    this.surveyService.getAllSurveys().subscribe(data => {
+      this.surveys = data;
+    });
   }
 }

@@ -23,17 +23,27 @@ export class SurveyComponent implements Survey {
   }
 
   constructor(private surveyService: SurveyService, private router: Router) {}
-  createSurvey() {
+
+createSurvey() {
     const newSurvey: Survey = {
       surveyName: this.surveyName,
       questions: this.questions,
       startDate: this.startDate,
       endDate: this.endDate
-    }
-    this.surveyService.saveSurvey(newSurvey);  // Save the survey using the service
-    console.log('Survey saved:', newSurvey);
-    this.router.navigateByUrl('/survey-list');  // Navigate to the survey list after saving.
-  }
+    };
+    this.surveyService.saveSurvey(newSurvey).subscribe(
+      response => {
+        // Handle the response from the server here. For instance:
+        console.log('Survey saved:', response);
+        this.router.navigateByUrl('/survey-list');  // Navigate after saving.
+      },
+      error => {
+        // Handle errors here
+        console.error('Error saving survey:', error);
+      }
+    );
+}
+
   
   
 }
