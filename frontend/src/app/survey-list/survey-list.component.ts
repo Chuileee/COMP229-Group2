@@ -16,6 +16,9 @@ export class SurveyListComponent implements OnInit {
   ngOnInit(): void {
     this.surveyService.getAllSurveys().subscribe(data => {
       this.surveys = data;
-    });
+  }, error => {
+      console.error("Error fetching surveys: ", error);
+  });
+  
   }
 }
