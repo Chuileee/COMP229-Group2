@@ -3,9 +3,19 @@ var userController = require('../src/userController');
 var surveyController = require('../src/surveyController');
 const router = express.Router();
 
-router.route('/user/save').post(userController.saveUserInfoController);
-router.route('/user/login').post(userController.loginUserInfoController);
+// Middleware for logging requests
+router.use((req, res, next) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
+    next();
+});
 
-router.post('/saveSurvey', surveyController.saveSurveyController);
+// User routes
+router.post('/signup', userController.saveUserInfoController);
+router.post('/login', userController.loginUserInfoController);
+router.post('/profile', userController.getUserInfoController);
+
+
+// Survey routes
+router.post('/survey', surveyController.saveSurveyController);  // Changed route to be more RESTful
 
 module.exports = router;
