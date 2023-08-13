@@ -7,6 +7,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { EditComponent } from './edit/edit.component';
 import { SurveyComponent } from './survey/survey.component';
 import { SurveyListComponent } from './survey-list/survey-list.component';
+import { AnalysisComponent } from './analysis/analysis.component';
 
 
 const routes: Routes = [
@@ -16,8 +17,8 @@ const routes: Routes = [
   {path:'profile', component:ProfileComponent},
   {path:'edit', component:EditComponent},
   {path:'survey', component:SurveyComponent},
-  {path:'survey-list', component:SurveyListComponent}
-
+  {path:'survey-list', component:SurveyListComponent},
+  {path:'analysis', component:AnalysisComponent}
 ];
 
 @NgModule({
