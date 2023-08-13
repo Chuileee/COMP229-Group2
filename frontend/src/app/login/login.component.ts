@@ -26,7 +26,7 @@ export class LoginComponent {
     this.http.post('http://localhost:4000/login', bodyData).subscribe((resultData: any) => {
       if (resultData.status) {
         // Store user's email for further usage.
-        localStorage.setItem('userEmail', resultData.email);
+        localStorage.setItem('userEmail', this.email);
         this.authService.login(resultData.email, resultData.username);
         this.router.navigateByUrl('/profile');
       } else {
