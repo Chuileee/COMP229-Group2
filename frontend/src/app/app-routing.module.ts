@@ -6,6 +6,8 @@ import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EditComponent } from './edit/edit.component';
 import { SurveyComponent } from './survey/survey.component';
+import { SurveyListComponent } from './survey-list/survey-list.component';
+
 
 const routes: Routes = [
   {path:'home', component:HomeComponent},
@@ -13,7 +15,9 @@ const routes: Routes = [
   {path:'register', component:RegisterComponent},
   {path:'profile', component:ProfileComponent},
   {path:'edit', component:EditComponent},
-  {path:'survey', component:SurveyComponent}
+  {path:'survey', component:SurveyComponent},
+  {path:'survey-list', component:SurveyListComponent}
+
 ];
 
 @NgModule({

@@ -26,9 +26,7 @@ import { SurveyListComponent } from './survey-list/survey-list.component';
     HomeComponent,
     ProfileComponent,
     EditComponent,
-
-    SurveyListComponent
-
+    SurveyListComponent,
     SurveyComponent
 
   ],
