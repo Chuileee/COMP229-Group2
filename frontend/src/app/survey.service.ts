@@ -26,4 +26,11 @@ export class SurveyService {
     const endpoint = `${this.baseUrl}/allSurveys`;
     return this.http.get<Survey[]>(endpoint);
   }
+  
+  // Fetch a specific survey by its _id
+  getSurveyById(id: string): Observable<Survey> {
+    const endpoint = `${this.baseUrl}/survey/${id}`;
+    return this.http.get<Survey>(endpoint);
+  }
+
 }

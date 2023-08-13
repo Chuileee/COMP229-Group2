@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SurveyService } from '../survey.service';
 import { Survey } from '../survey/survey.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-survey-list',
@@ -11,7 +12,7 @@ export class SurveyListComponent implements OnInit {
 
   surveys: Survey[] = [];
 
-  constructor(private surveyService: SurveyService) {}
+  constructor(private surveyService: SurveyService, private router: Router) {}
 
   ngOnInit(): void {
     this.surveyService.getAllSurveys().subscribe(data => {
@@ -23,8 +24,9 @@ export class SurveyListComponent implements OnInit {
 
   // Adding the respondToSurvey method:
   respondToSurvey(survey: Survey) {
-    alert('Responding to: ' + survey.surveyName);
-}
+    this.router.navigate(['/respond', survey._id]);  // Assuming your survey object has an 'id' field
+  }
+  
 
     // Here, you can implement any functionality you desire.
     // For instance, navigate to another component, open a modal, etc.

@@ -14,6 +14,7 @@ import { HeaderComponent } from './partials/header/header.component';
 import { FooterComponent } from './partials/footer/footer.component';
 import { AnalysisComponent } from './analysis/analysis.component';
 import { SurveyListComponent } from './survey-list/survey-list.component';
+import { SurveyResponseComponent } from './survey-response/survey-response.component';
 
 
 
@@ -29,7 +30,8 @@ import { SurveyListComponent } from './survey-list/survey-list.component';
     EditComponent,
     SurveyListComponent,
     SurveyComponent,
-    AnalysisComponent
+    AnalysisComponent,
+    SurveyResponseComponent
 
 
   ],

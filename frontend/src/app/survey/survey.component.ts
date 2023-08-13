@@ -10,11 +10,13 @@ import { SurveyService } from '../survey.service';
 })
 export class SurveyComponent {
   survey: Survey = {
+    _id: '',  // Initialize with an empty string or some default value
     surveyName: '',
     questions: [],
     startDate: '',
     endDate: ''
   };
+  
 
   ngOnInit() {
     this.addQuestion();
@@ -28,6 +30,7 @@ export class SurveyComponent {
 
   createSurvey() {
     const newSurvey: Survey = {
+      _id: '',
       surveyName: this.survey.surveyName,
       questions: this.survey.questions,
       startDate: this.survey.startDate,

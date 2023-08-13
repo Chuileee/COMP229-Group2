@@ -27,6 +27,20 @@ var getAllSurveysController = async(req, res) => {
     }
 }
 
+// Inside surveyController.js
+const Survey = require('./surveyModel.js');  // Update the path if necessary
 
-module.exports = { saveSurveyController, getAllSurveysController };
+var getSurveyByIdController = async (req, res) => {
+    try {
+        const survey = await Survey.findById(req.params.id);
+        if (!survey) {
+            return res.status(404).send({ message: 'Survey not found' });
+        }
+        res.status(200).send(survey);
+    } catch (error) {
+        res.status(500).send({ message: 'Error fetching survey', error: error.message });
+    }
+};
+
+module.exports = { saveSurveyController, getAllSurveysController, getSurveyByIdController };
 
