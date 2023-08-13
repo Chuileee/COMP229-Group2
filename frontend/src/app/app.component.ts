@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { AuthService } from './auth.service';  // Update with the correct path
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,7 +8,11 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Survey Creator';
   
-  // Add this line for isLoggedIn property:
-  isLoggedIn = false; // Initially set to false; change it based on your authentication logic
+  
+  constructor(private authService: AuthService) {}
+
+  get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
 }
 
