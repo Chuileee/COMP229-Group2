@@ -14,7 +14,7 @@ app.use(cors({
 app.use(express.json());
 
 // Add routes middleware
-app.use('/user', routes);
+app.use('/', routes);
 
 //connect to MongoDB
 mongoose.set("strictQuery", false);
