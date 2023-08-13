@@ -1,1 +1,18 @@
-<p>survey-list works!</p>
+<p>Survey List</p>
+
+<div *ngFor="let survey of surveys">
+  <h3>{{ survey.surveyName }}</h3>
+  
+  <div *ngFor="let question of survey.questions">
+    <p><strong>Question:</strong> {{ question.text }}</p>
+    <p><strong>Type:</strong> {{ question.questiontype }}</p>
+    <div *ngIf="question.questiontype === 'multipleChoice'">
+      <p><strong>Options:</strong></p>
+      <ul>
+        <li *ngFor="let option of question.options">{{ option }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+</div>
