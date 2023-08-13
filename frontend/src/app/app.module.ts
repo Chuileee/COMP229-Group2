@@ -30,8 +30,7 @@ import { SurveyListComponent } from './survey-list/survey-list.component';
     SurveyListComponent,
     SurveyComponent,
     AnalysisComponent
-    SurveyListComponent
-    SurveyComponent
+
 
   ],
   imports: [

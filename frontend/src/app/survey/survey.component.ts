@@ -13,9 +13,6 @@ export class SurveyComponent implements Survey {
   questions: Question[] = [];
   startDate: string = '';
   endDate: string = '';
-  questions: { text: string; questiontype: string; options?: string[] }[] = [];
-  startDate: string = ''; // Add this property
-  endDate: string = '';   // Add this property
 
   ngOnInit() {
     this.addQuestion();
@@ -27,7 +24,7 @@ export class SurveyComponent implements Survey {
 
   constructor(private surveyService: SurveyService, private router: Router) {}
 
-createSurvey() {
+  createSurvey() {
     const newSurvey: Survey = {
       surveyName: this.surveyName,
       questions: this.questions,
@@ -36,17 +33,12 @@ createSurvey() {
     };
     this.surveyService.saveSurvey(newSurvey).subscribe(
       response => {
-        // Handle the response from the server here. For instance:
         console.log('Survey saved:', response);
-        this.router.navigateByUrl('/survey-list');  // Navigate after saving.
+        this.router.navigateByUrl('/survey-list');
       },
       error => {
-        // Handle errors here
         console.error('Error saving survey:', error);
       }
     );
-}
-
-  
-  
+  }
 }

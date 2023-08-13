@@ -1,5 +1,4 @@
 var surveyModel = require('./surveyModel');
-console.log("Constructed survey data for saving:", surveyModelData);
 
 module.exports.saveSurveyService = (surveyDetails) => {
     return new Promise(function saveSurveyFun(resolve, reject){
