@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit { // Implement OnInit
     const userEmail = localStorage.getItem('userEmail'); // Assuming you are storing email in localStorage
 
     if (userEmail) {
-      this.http.post('http://localhost:4000/user/profile', { email: userEmail }).subscribe(
+      this.http.post('http://localhost:4000/profile', { email: userEmail }).subscribe(
         (data: any) => {
           if (data.status) {
             this.userProfile = data.user;

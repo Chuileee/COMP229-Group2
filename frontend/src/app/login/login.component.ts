@@ -22,7 +22,7 @@ export class LoginComponent {
     };
 
 
-    this.http.post('http://localhost:4000/user/login', bodyData).subscribe((resultData: any) => {
+    this.http.post('http://localhost:4000/login', bodyData).subscribe((resultData: any) => {
       if (resultData.status) {
         // Store user's email for further usage.
         localStorage.setItem('userEmail', this.email);
