@@ -25,7 +25,7 @@ export class RegisterComponent {
     "email" : this.email,
     "password" : this.password,
   };
-  this.http.post("http://localhost:4000/user/save", bodyData).subscribe((resultData: any)=>{
+  this.http.post("http://localhost:4000/signup", bodyData).subscribe((resultData: any)=>{
     console.log(resultData);
     alert("User has been registered successfully.");
   });
