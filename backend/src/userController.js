@@ -47,20 +47,30 @@ var getUserInfoController = async(req, res) => {
     }
 };
 
-var updateUserProfileController = async(req, res) => {
+var updateUserProfileController = async (req, res) => {
     try {
-        const { email, username } = req.body; 
-        const result = await userService.updateUserProfileService({ email, username });
-        
-        if (result.status) {
-            res.send({ status: true, user: result.user });
-        } else {
-            res.send({ status: false, message: result.message });
-        }
+      console.log("Received update profile request with body:", req.body); // Add this line
+  
+      const { username, email } = req.body;
+      const userId = req.user.id; // Assuming you have user information available in the request (authenticated user)
+  
+      // Call the userService to update the user's profile
+      const status = await userService.updateUserProfileService(userId, { username, email });
+  
+      if (status) {
+        res.send({ status: true, message: "Profile updated Successfully." });
+      } else {
+        res.send({ status: false, message: "Error in updating profile." });
+      }
     } catch (error) {
-        console.error("Error updating user profile:", error);
-        res.send({ status: false, message: error.message });
+      console.error("Error updating user profile:", error);
+      res.send({ status: false, message: error.message });
     }
-};
+  };
 
-module.exports = { saveUserInfoController, loginUserInfoController, getUserInfoController, updateUserProfileController }
+  module.exports = {
+    saveUserInfoController,
+    loginUserInfoController,
+    getUserInfoController,
+    updateUserProfileController
+  };

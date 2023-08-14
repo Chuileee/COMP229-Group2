@@ -3,6 +3,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service'; 
 
+const apiUrl = 'http://localhost:4000'; // Replace with your actual backend URL
+const updateProfileEndpoint = '/update-profile'; // Replace with your actual update profile endpoint
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
