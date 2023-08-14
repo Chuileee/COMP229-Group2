@@ -63,3 +63,25 @@ module.exports.getUserInfoService = (email) => {
         });
     });
 }
+module.exports.updateUserProfileService = ({ email, username }) => {
+    return new Promise((resolve, reject) => {
+        userModel.findOneAndUpdate({ email }, { username }, { new: true }, function (error, updatedUser) {
+            if (error) {
+                console.error("Error while updating user in DB:", error);
+                reject({ status: false, message: "Error updating user information." });
+            } else {
+                if (updatedUser) {
+                    // Exclude the password and other sensitive fields
+                    const userProfile = {
+                        username: updatedUser.username,
+                        email: updatedUser.email,
+                        // ... other fields you want to send but DO NOT send the password
+                    };
+                    resolve({ status: true, user: userProfile });
+                } else {
+                    reject({ status: false, message: "User not found." });
+                }
+            }
+        });
+    });
+}

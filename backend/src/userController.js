@@ -47,4 +47,20 @@ var getUserInfoController = async(req, res) => {
     }
 };
 
-module.exports = { saveUserInfoController, loginUserInfoController, getUserInfoController }
+var updateUserProfileController = async(req, res) => {
+    try {
+        const { email, username } = req.body; 
+        const result = await userService.updateUserProfileService({ email, username });
+        
+        if (result.status) {
+            res.send({ status: true, user: result.user });
+        } else {
+            res.send({ status: false, message: result.message });
+        }
+    } catch (error) {
+        console.error("Error updating user profile:", error);
+        res.send({ status: false, message: error.message });
+    }
+};
+
+module.exports = { saveUserInfoController, loginUserInfoController, getUserInfoController, updateUserProfileController }
