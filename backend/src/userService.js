@@ -63,3 +63,25 @@ module.exports.getUserInfoService = (email) => {
         });
     });
 }
+
+module.exports.updateUserProfileService = (userId, updatedProfile) => {
+    return new Promise((resolve, reject) => {
+      userModel.findByIdAndUpdate(
+        userId,
+        { $set: updatedProfile },
+        { new: true }, // To get the updated user object in the response
+        (error, updatedUser) => {
+          if (error) {
+            console.error("Error updating user profile in DB:", error);
+            reject(false);
+          } else {
+            if (updatedUser) {
+              resolve(true);
+            } else {
+              reject(false);
+            }
+          }
+        }
+      );
+    });
+  };
