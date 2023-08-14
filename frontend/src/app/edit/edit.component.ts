@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../auth.service';
+
+const apiUrl = 'http://localhost:4000'; // Replace with your actual backend URL
+const updateProfileEndpoint = '/update-profile'; // Replace with your actual update profile endpoint
 
 @Component({
   selector: 'app-edit',
@@ -13,7 +18,9 @@ export class EditComponent {
   password : string="";
 
   constructor(
-    private router: Router
+    private router: Router,
+    private http: HttpClient,
+    private authService: AuthService
   ) {}
 
   cancel() {
@@ -21,4 +28,28 @@ export class EditComponent {
     this.router.navigate(['/profile']);
   }
 
+  submitForm() {
+    const updatedProfile = {
+      username: this.username,
+      email: this.email
+    };
+
+    this.http.put<any>(`${apiUrl}${updateProfileEndpoint}`, updatedProfile)
+    .subscribe(
+      response => {
+        // Handle success
+        console.log('Profile updated successfully:', response);
+
+        // Update the user data in the AuthService
+        this.authService.updateUserProfile(response.username, response.email);
+
+        // Navigate back to the profile page
+        this.router.navigate(['/profile']);
+      },
+      error => {
+        // Handle error
+        console.error('Profile update failed:', error);
+      }
+    );
+}
 }

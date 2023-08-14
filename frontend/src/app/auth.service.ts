@@ -19,7 +19,6 @@ export class AuthService {
     localStorage.setItem('username', username);
     localStorage.setItem('email', email);
   }
-  
 
   logout(): void {
     this.isLogin = false;
@@ -40,4 +39,14 @@ export class AuthService {
   getEmail(): string | null {
     return this.currentUser?.email || null;
   }
+
+
+updateUserProfile(username: string, email: string): void {
+  if (this.currentUser) {
+    this.currentUser.username = username;
+    this.currentUser.email = email;
+    localStorage.setItem('username', username);
+    localStorage.setItem('email', email);
+  }
+}
 }
