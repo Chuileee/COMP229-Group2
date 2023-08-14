@@ -1,39 +1,67 @@
 import { Component } from '@angular/core';
-import { Survey, Question } from './survey.model';  // Import the models (adjust path if necessary)
+import { Survey, Question } from './survey.model';
 import { Router } from '@angular/router';
-import { SurveyService } from '../survey.service';  // Update with the actual path
+import { SurveyService } from '../survey.service';
 
 @Component({
   selector: 'app-survey',
   templateUrl: './survey.component.html',
   styleUrls: ['./survey.component.css']
 })
-export class SurveyComponent implements Survey {
-  surveyName: string = '';
-  questions: Question[] = [];
-  startDate: string = '';
-  endDate: string = '';
+export class SurveyComponent {
+  survey: Survey = {
+    _id: '',  
+    surveyName: '',
+    questions: [],
+    startDate: '',
+    endDate: ''
+  };
+
+  constructor(private surveyService: SurveyService, private router: Router) {}
 
   ngOnInit() {
     this.addQuestion();
   }
 
   addQuestion() {
-    this.questions.push({ text: '', questiontype: 'multipleChoice', options: ['', '', '', ''] });
+    const newQuestion: Question = {
+      text: '',
+      questiontype: 'multipleChoice',
+      options: [],
+      optionsString: ''
+    }
+    this.survey.questions.push(newQuestion);
   }
 
-  constructor(private surveyService: SurveyService, private router: Router) {}
-  createSurvey() {
-    const newSurvey: Survey = {
-      surveyName: this.surveyName,
-      questions: this.questions,
-      startDate: this.startDate,
-      endDate: this.endDate
-    }
-    this.surveyService.saveSurvey(newSurvey);  // Save the survey using the service
-    console.log('Survey saved:', newSurvey);
-    this.router.navigateByUrl('/survey-list');  // Navigate to the survey list after saving.
+  // Convert comma-separated string to options array
+  setOptionsFromString(optionString: string): string[] {
+    return optionString.split(',').map(option => option.trim());
   }
-  
-  
+
+  // Create and save the survey
+  createSurvey() {
+    this.survey.questions.forEach(question => {
+      if (question.questiontype === 'multipleChoice' && question.optionsString) {
+        question.options = this.setOptionsFromString(question.optionsString);
+      }
+    });
+
+    const newSurvey: Survey = {
+      _id: '',
+      surveyName: this.survey.surveyName,
+      questions: this.survey.questions,
+      startDate: this.survey.startDate,
+      endDate: this.survey.endDate
+    };
+
+    this.surveyService.saveSurvey(newSurvey).subscribe(
+      response => {
+        console.log('Survey saved:', response);
+        this.router.navigateByUrl('/survey-list');  // Navigate after saving.
+      },
+      error => {
+        console.error('Error saving survey:', error);
+      }
+    );
+  }
 }

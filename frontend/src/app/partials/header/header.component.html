@@ -21,8 +21,8 @@
             </ul>
             <!-- This is where we add the username and the logout button -->
             <div *ngIf="authService.isLogin" class="navbar-text ml-auto">
-                <li class="nav-item">Welcome, {{ username }}</li>
-                <button class="btn btn-outline-danger ml-2" (click)="logout()">Logout</button>
+                <li class="nav-item">Welcome!{{ username }}
+                <button class="btn btn-outline-danger ml-2" (click)="logout()">Logout</button></li>
               </div>
         </div>
     </div>

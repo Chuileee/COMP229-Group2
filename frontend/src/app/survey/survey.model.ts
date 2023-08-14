@@ -1,7 +1,8 @@
 export interface Question {
     text: string;
     questiontype: 'multipleChoice' | 'agreeDisagree';
-    options?: string[];
+    options: string[];
+    optionsString: string;
   }
   
   export interface Survey {
