@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Survey, Question } from './survey.model';
+import { Router } from '@angular/router';
+import { SurveyService } from '../survey.service';
 
 @Component({
   selector: 'app-survey',
@@ -6,23 +9,59 @@ import { Component } from '@angular/core';
   styleUrls: ['./survey.component.css']
 })
 export class SurveyComponent {
-  surveyName: string = '';
-  questions: { text: string; questiontype: string; options?: string[] }[] = [];
-  startDate: string = ''; // Add this property
-  endDate: string = '';   // Add this property
+  survey: Survey = {
+    _id: '',  
+    surveyName: '',
+    questions: [],
+    startDate: '',
+    endDate: ''
+  };
+
+  constructor(private surveyService: SurveyService, private router: Router) {}
 
   ngOnInit() {
     this.addQuestion();
   }
 
   addQuestion() {
-    this.questions.push({ text: '', questiontype: 'multipleChoice', options: ['', '', '', ''] });
+    const newQuestion: Question = {
+      text: '',
+      questiontype: 'multipleChoice',
+      options: [],
+      optionsString: ''
+    }
+    this.survey.questions.push(newQuestion);
   }
 
+  // Convert comma-separated string to options array
+  setOptionsFromString(optionString: string): string[] {
+    return optionString.split(',').map(option => option.trim());
+  }
+
+  // Create and save the survey
   createSurvey() {
-    console.log(this.surveyName);
-    console.log(this.questions);
-    console.log(this.startDate);
-    console.log(this.endDate);
+    this.survey.questions.forEach(question => {
+      if (question.questiontype === 'multipleChoice' && question.optionsString) {
+        question.options = this.setOptionsFromString(question.optionsString);
+      }
+    });
+
+    const newSurvey: Survey = {
+      _id: '',
+      surveyName: this.survey.surveyName,
+      questions: this.survey.questions,
+      startDate: this.survey.startDate,
+      endDate: this.survey.endDate
+    };
+
+    this.surveyService.saveSurvey(newSurvey).subscribe(
+      response => {
+        console.log('Survey saved:', response);
+        this.router.navigateByUrl('/survey-list');  // Navigate after saving.
+      },
+      error => {
+        console.error('Error saving survey:', error);
+      }
+    );
   }
 }

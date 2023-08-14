@@ -41,3 +41,25 @@ module.exports.userLoginService = (userLoginDetails) => {
         });
     });
 }
+module.exports.getUserInfoService = (email) => {
+    return new Promise((resolve, reject) => {
+        userModel.findOne({ email: email }, function (error, user) {
+            if (error) {
+                console.error("Error while searching for user in DB:", error);
+                reject({ status: false, message: "Error fetching user information." });
+            } else {
+                if (user) {
+                    // Exclude the password and other sensitive fields if needed
+                    const userProfile = {
+                        username: user.username,
+                        email: user.email,
+                        // ... other fields you want to send but DO NOT send the password
+                    };
+                    resolve({ status: true, user: userProfile });
+                } else {
+                    reject({ status: false, message: "User not found." });
+                }
+            }
+        });
+    });
+}

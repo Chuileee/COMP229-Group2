@@ -1,16 +1,16 @@
 <div class="container mt-5">
-    <h2>Welcome!</h2><br>
+    <h2>Welcome, {{ userProfile.username }}!</h2><br>
     <div class="card">
         <div class="card-header">
             <h4>Your Profile</h4>
         </div>
         <div class="card-body">
-            <p><strong>Email:</strong> </p>
+            <p><strong>Username:</strong> {{ userProfile.username }}</p>
+            <p><strong>Email:</strong> {{ userProfile.email }}</p>
 
-            <button color="primary" (click)="editProfile()" class="btn btn-primary">Edit Profile</button>
+            <button (click)="editProfile()" class="btn btn-primary">Edit Profile</button>
             <button (click)="createSurvey()" class="btn btn-success">Create Survey</button>
             <button type="button" (click)="logout()" class="btn btn-danger">Logout</button>
- 
         </div>
     </div>
 </div>
