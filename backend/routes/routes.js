@@ -16,26 +16,10 @@ router.post('/login', userController.loginUserInfoController);
 router.post('/profile', userController.getUserInfoController);
 router.put('/update-profile', userController.updateUserProfileController);
 
-
-// Update user profile
-router.put('/update-profile', userController.updateUserProfileController);
-
-
 // Survey routes
-router.post('/survey', surveyController.saveSurveyController);  // Changed route to be more RESTful
-
-//Define the POST route for saving a survey
-router.post('/saveSurvey', async (req, res) => {
-    try {
-        const survey = new Survey(req.body);
-        await survey.save();
-        res.status(200).send(survey);
-    } catch (error) {
-        res.status(500).send({ message: 'Error saving survey', error: error.message });
-    }
-});
-
+router.post('/survey', surveyController.saveSurveyController);
 router.get('/allSurveys', surveyController.getAllSurveysController);
 router.get('/survey/:id', surveyController.getSurveyByIdController);
+router.post('/submitResponse', surveyController.saveSurveyResponseController);
 
 module.exports = router;

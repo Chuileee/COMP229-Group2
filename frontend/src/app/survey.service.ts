@@ -32,4 +32,15 @@ saveSurvey(survey: Survey) {
     const endpoint = `${this.baseUrl}/allSurveys`; // Use the correct endpoint URL
     return this.http.get<any[]>(endpoint); // Use the 'endpoint' variable
   }
+
+  submitSurveyResponse(surveyId: string, response: any): Observable<any> {
+    const endpoint = `${this.baseUrl}/submitResponse`; 
+    // Assuming '/submitResponse' is the backend endpoint for submitting responses. If not, replace with the actual endpoint.
+    const payload = {
+      surveyId: surveyId,
+      responses: response
+    };
+    return this.http.post(endpoint, payload);
+  }
+  
 }

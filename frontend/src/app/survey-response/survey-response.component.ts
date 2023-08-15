@@ -37,14 +37,25 @@ export class SurveyResponseComponent implements OnInit {
 
   submitResponses(): void {
     console.log(this.responses);
-
-    // Increment the response counter and store in local storage
-    this.responseCounter++;
+  
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      localStorage.setItem(`responseCount_${id}`, this.responseCounter.toString());
-    }
-
-    alert('Responses submitted! Number of responses: ' + this.responseCounter);
+      this.surveyService.submitSurveyResponse(id, this.responses).subscribe(
+        data => {
+          if (data.status) {
+            // Increment the response counter and store in local storage
+            this.responseCounter++;
+            localStorage.setItem(`responseCount_${id}`, this.responseCounter.toString());
+            alert('Responses submitted! Number of responses: ' + this.responseCounter);
+          } else {
+            alert('Error submitting responses: ' + data.message);
+          }
+        },
+        error => {
+          console.error("Error submitting responses: ", error);
+          alert('Error submitting responses. Please try again.');
+        }
+      );
+  }
   }
 }

@@ -50,5 +50,24 @@ var getSurveyByIdController = async (req, res) => {
     }
 };
 
-module.exports = { saveSurveyController, getAllSurveysController, getSurveyByIdController };
+var saveSurveyResponseController = async(req, res) => {
+    console.log("saveSurveyResponseController called!");
+    
+    try{
+        var status = await surveyService.saveSurveyResponseService(req.body);
+
+        if(status){
+            res.send({"status": true, message: "Response saved Successfully."});
+        }else{
+            res.send({"status": false, message: "Error in saving response."});
+        }
+    }catch(error){
+        console.log(error);
+        res.send({"status": false, message: "Exception occurred while saving response."});
+    }
+    console.log("Received survey response:", req.body);
+}
+
+
+module.exports = { saveSurveyController, getAllSurveysController, getSurveyByIdController, saveSurveyResponseController };
 
