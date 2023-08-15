@@ -49,10 +49,8 @@ var getUserInfoController = async(req, res) => {
 
 var updateUserProfileController = async (req, res) => {
     try {
-      console.log("Received update profile request with body:", req.body); // Add this line
-  
       const { username, email } = req.body;
-      const userId = req.user.id; // Assuming you have user information available in the request (authenticated user)
+      const userId = req.user.id;
   
       // Call the userService to update the user's profile
       const status = await userService.updateUserProfileService(userId, { username, email });
