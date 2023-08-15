@@ -49,13 +49,15 @@ var getUserInfoController = async(req, res) => {
 
 var updateUserProfileController = async (req, res) => {
     try {
-      console.log("Received update profile request with body:", req.body); // Add this line
+      console.log("Received update profile request with body:", req.body);
   
-      const { username, email } = req.body;
-      const userId = req.user.id; // Assuming you have user information available in the request (authenticated user)
+      const userEmail = req.body.email; 
+      const updateData = {
+        username: req.body.username,
+        email: req.body.email
+      };
   
-      // Call the userService to update the user's profile
-      const status = await userService.updateUserProfileService(userId, { username, email });
+      const status = await userService.updateUserProfileService(userEmail, updateData);
   
       if (status) {
         res.send({ status: true, message: "Profile updated Successfully." });
@@ -67,6 +69,7 @@ var updateUserProfileController = async (req, res) => {
       res.send({ status: false, message: error.message });
     }
   };
+
 
   module.exports = {
     saveUserInfoController,

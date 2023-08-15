@@ -64,24 +64,35 @@ module.exports.getUserInfoService = (email) => {
     });
 }
 
-module.exports.updateUserProfileService = (userId, updatedProfile) => {
+module.exports.updateUserProfileService = (userEmail, updatedProfile) => {
     return new Promise((resolve, reject) => {
-      userModel.findByIdAndUpdate(
-        userId,
-        { $set: updatedProfile },
-        { new: true }, // To get the updated user object in the response
-        (error, updatedUser) => {
-          if (error) {
-            console.error("Error updating user profile in DB:", error);
-            reject(false);
-          } else {
-            if (updatedUser) {
-              resolve(true);
-            } else {
-              reject(false);
-            }
-          }
+
+        console.log("Attempting to update profile for email:", userEmail);
+
+        // Check if the password is being updated, and encrypt it
+        if(updatedProfile.password){
+            updatedProfile.password = encryptor.encrypt(updatedProfile.password);
         }
-      );
+
+        userModel.findOneAndUpdate(
+            { email: userEmail },
+            { $set: updatedProfile },
+            { new: true }, // To get the updated user object in the response
+            (error, updatedUser) => {
+                if (error) {
+                    console.error("Error updating user profile in DB:", error);
+                    reject(false);
+                } else {
+                    if (updatedUser) {
+                        console.log("Updated user:", updatedUser);
+                        resolve(true);
+                    } else {
+                        console.warn("No user was found to update for email:", userEmail);
+                        reject(false);
+                    }
+                }
+            }
+        );
     });
-  };
+};
+

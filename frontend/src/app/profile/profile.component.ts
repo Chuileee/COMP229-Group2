@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core'; // Add OnInit
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { UserService } from '../user.service';
 
 
 
@@ -17,20 +18,21 @@ interface UserProfile {
   styleUrls: ['./profile.component.css']
 })
 
-export class ProfileComponent implements OnInit { // Implement OnInit
+export class ProfileComponent implements OnInit {
+
   userProfile: UserProfile = {};
-  
-  constructor(private router: Router, private http: HttpClient, private authService: AuthService) {}
+
+  constructor(private router: Router, private userService: UserService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.fetchUserProfile();
   }
 
   fetchUserProfile() {
-    const userEmail = localStorage.getItem('userEmail'); // Assuming you are storing email in localStorage
+    const userEmail = localStorage.getItem('userEmail');
 
     if (userEmail) {
-      this.http.post('http://localhost:4000/profile', { email: userEmail }).subscribe(
+      this.userService.fetchUserProfile(userEmail).subscribe(
         (data: any) => {
           if (data.status) {
             this.userProfile = data.user;
@@ -42,6 +44,7 @@ export class ProfileComponent implements OnInit { // Implement OnInit
       );
     }
   }
+
 
   editProfile() {
     this.router.navigate(['/edit']);

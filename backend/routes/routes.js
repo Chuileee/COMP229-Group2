@@ -14,7 +14,8 @@ router.use((req, res, next) => {
 router.post('/signup', userController.saveUserInfoController);
 router.post('/login', userController.loginUserInfoController);
 router.post('/profile', userController.getUserInfoController);
-router.post('/update-profile', userController.updateUserProfileController);
+router.put('/update-profile', userController.updateUserProfileController);
+
 
 
 // Survey routes
