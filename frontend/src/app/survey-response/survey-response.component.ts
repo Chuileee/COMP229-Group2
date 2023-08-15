@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Survey } from '../survey/survey.model';  // Make sure to update the path accordingly
-import { ActivatedRoute } from '@angular/router'; 
+import { Component, Input, OnInit } from '@angular/core';
+import { Survey } from '../survey/survey.model';
+import { ActivatedRoute } from '@angular/router';
 import { SurveyService } from '../survey.service';
 
 @Component({
@@ -9,34 +9,42 @@ import { SurveyService } from '../survey.service';
   styleUrls: ['./survey-response.component.css']
 })
 export class SurveyResponseComponent implements OnInit {
-
-  survey: Survey | null = null; // Initialize with null. You'll need to fetch the survey data later.
+  @Input() survey: Survey | null = null; // Define input property
   responses: any = {};
+  responseCounter: number = 0;
+
   constructor(
-    private route: ActivatedRoute,   // Inject ActivatedRoute
-    private surveyService: SurveyService // Inject your SurveyService
+    private route: ActivatedRoute,
+    private surveyService: SurveyService
   ) { }
 
-  
-    // Get the survey's _id from the route parameters
-    ngOnInit(): void {
-      const id = this.route.snapshot.paramMap.get('id');  // Fetch the survey id from the URL
-      if (id) {
-        this.surveyService.getSurveyById(id).subscribe(data => {
-          this.survey = data;  // Assign the fetched survey data to the survey property
-        }, error => {
-          console.error("Error fetching survey: ", error);
-        });
-      }
-    }
-    
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.surveyService.getSurveyById(id).subscribe(data => {
+        this.survey = data;
 
-    submitResponses(): void {
-      console.log(this.responses); // For debugging, you should see all user responses
-    
-      // Now, you can send 'this.responses' to your backend or handle as needed.
-      
-      alert('Responses submitted!'); 
+        // Fetch response count from local storage
+        const storedResponseCount = localStorage.getItem(`responseCount_${id}`);
+        if (storedResponseCount) {
+          this.responseCounter = parseInt(storedResponseCount, 10);
+        }
+      }, error => {
+        console.error("Error fetching survey: ", error);
+      });
     }
-    
+  }
+
+  submitResponses(): void {
+    console.log(this.responses);
+
+    // Increment the response counter and store in local storage
+    this.responseCounter++;
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      localStorage.setItem(`responseCount_${id}`, this.responseCounter.toString());
+    }
+
+    alert('Responses submitted! Number of responses: ' + this.responseCounter);
+  }
 }

@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class SurveyService {
 
   constructor(private http: HttpClient) {}
@@ -21,17 +22,14 @@ saveSurvey(survey: Survey) {
   return this.http.post(endpoint, survey);
 }
 
-
-  // Fetch all surveys from the backend
-  getAllSurveys(): Observable<Survey[]> {
-    const endpoint = `${this.baseUrl}/allSurveys`;
-    return this.http.get<Survey[]>(endpoint);
-  }
-
   // Fetch a specific survey by its _id
   getSurveyById(id: string): Observable<Survey> {
     const endpoint = `${this.baseUrl}/survey/${id}`;
     return this.http.get<Survey>(endpoint);
   }
 
+  getAllSurveys(): Observable<any[]> {
+    const endpoint = `${this.baseUrl}/allSurveys`; // Use the correct endpoint URL
+    return this.http.get<any[]>(endpoint); // Use the 'endpoint' variable
+  }
 }
