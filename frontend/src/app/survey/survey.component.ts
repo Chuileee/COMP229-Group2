@@ -32,6 +32,12 @@ export class SurveyComponent {
     }
     this.survey.questions.push(newQuestion);
   }
+  
+  deleteQuestion(index: number) {
+    this.survey.questions.splice(index, 1);
+  }
+  
+
 
   // Convert comma-separated string to options array
   setOptionsFromString(optionString: string): string[] {

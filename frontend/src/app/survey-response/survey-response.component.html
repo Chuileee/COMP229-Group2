@@ -52,7 +52,15 @@
                 </label>
               </div>
             </div>
-            
+           
+            <!-- If the question type is freeText, provide a textarea for the response -->
+            <div *ngIf="question.questiontype === 'freeText'">
+              <textarea class="form-control" 
+                        rows="4"
+                        [(ngModel)]="responses[question.text]" 
+                        placeholder="Enter your response here"></textarea>
+            </div>
+
   
           <!-- Submit button to submit responses -->
           <button class="btn btn-primary mt-4" (click)="submitResponses()">Submit Responses</button>
