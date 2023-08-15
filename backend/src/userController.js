@@ -70,7 +70,6 @@ var updateUserProfileController = async (req, res) => {
     }
   };
 
-
   module.exports = {
     saveUserInfoController,
     loginUserInfoController,

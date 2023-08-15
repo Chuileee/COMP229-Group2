@@ -17,6 +17,9 @@ router.post('/profile', userController.getUserInfoController);
 router.put('/update-profile', userController.updateUserProfileController);
 
 
+// Update user profile
+router.put('/update-profile', userController.updateUserProfileController);
+
 
 // Survey routes
 router.post('/survey', surveyController.saveSurveyController);  // Changed route to be more RESTful

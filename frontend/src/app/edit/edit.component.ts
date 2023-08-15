@@ -32,6 +32,7 @@ export class EditComponent {
       email: this.email
     };
 
+
     this.userService.updateUserProfile(updatedProfile)
       .subscribe(
         response => {
@@ -48,3 +49,4 @@ export class EditComponent {
       );
   }
 }
+

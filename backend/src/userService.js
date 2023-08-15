@@ -64,6 +64,7 @@ module.exports.getUserInfoService = (email) => {
     });
 }
 
+
 module.exports.updateUserProfileService = (userEmail, updatedProfile) => {
     return new Promise((resolve, reject) => {
 
@@ -95,4 +96,3 @@ module.exports.updateUserProfileService = (userEmail, updatedProfile) => {
         );
     });
 };
-
