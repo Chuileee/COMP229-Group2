@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SurveyService {
-  private apiUrl = 'YOUR_BACKEND_API_URL'; // Replace with your actual API URL
+  private apiUrl = 'http://localhost:4000';
+  private surveyEndpoint = '/surveys'; // Replace with your actual API URL
 
   constructor(private http: HttpClient) {}
 
@@ -26,5 +27,9 @@ export class SurveyService {
   exportSurveyStatisticsToExcel(surveyId: string): Observable<any> {
     const url = `${this.apiUrl}/surveys/${surveyId}/export/excel`;
     return this.http.get(url, { responseType: 'blob' });
+  }
+
+  getAllSurveys(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}${this.surveyEndpoint}`);
   }
 }

@@ -15,20 +15,16 @@ export class SurveyListComponent implements OnInit {
   constructor(private surveyService: SurveyService, private router: Router) {}
 
   ngOnInit(): void {
-    this.surveyService.getAllSurveys().subscribe(data => {
-      this.surveys = data;
-    }, error => {
-      console.error("Error fetching surveys: ", error);
-    });
+    this.surveyService.getAllSurveys().subscribe(
+      (data: Survey[]) => {
+        this.surveys = data;
+      },
+      (error: any) => {
+        console.error('Error fetching surveys:', error);
+      });
   }
 
-  // Adding the respondToSurvey method:
   respondToSurvey(survey: Survey) {
-    this.router.navigate(['/respond', survey._id]);  // Assuming your survey object has an 'id' field
+    this.router.navigate(['/respond', survey._id]); // Assuming your survey object has an 'id' field
   }
-  
-
-    // Here, you can implement any functionality you desire.
-    // For instance, navigate to another component, open a modal, etc.
-  
 }

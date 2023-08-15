@@ -1,10 +1,11 @@
 <div class="container">
   <h2>Survey Analysis</h2>
-  <p>Number of Respondents: {{ numberOfRespondents }}</p>
-  <div *ngFor="let question of questions; let i = index;">
-    <h3>Question {{ i + 1 }}: {{ question.text }}</h3>
+  <div *ngFor="let data of surveyData; let i = index;">
+    <h3>Survey {{ i + 1 }}: {{ data.survey.name }}</h3>
+    <p>Number of Respondents: {{ data.numberOfRespondents }}</p>
     <!-- Display answer statistics here -->
+
+    <button class="btn btn-primary" (click)="exportToExcel()">Export to Excel</button>
+    <button class="btn btn-primary" (click)="exportViaEmail()">Export via Email</button>
   </div>
-  <button class="btn btn-primary" (click)="exportToExcel()">Export to Excel</button>
-  <button class="btn btn-primary" (click)="exportViaEmail()">Export via Email</button>
 </div>
