@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth.service';
+import { UserService } from '../user.service'; 
 
 const apiUrl = 'http://localhost:4000'; // Replace with your actual backend URL
 const updateProfileEndpoint = '/update-profile'; // Replace with your actual update profile endpoint
@@ -13,18 +14,15 @@ const updateProfileEndpoint = '/update-profile'; // Replace with your actual upd
 })
 export class EditComponent {
 
-  username : string="";
-  email : string="";
-  password : string="";
+  username: string = "";
+  email: string = "";
 
   constructor(
     private router: Router,
-    private http: HttpClient,
-    private authService: AuthService
+    private userService: UserService  // Replace HttpClient with UserService
   ) {}
 
   cancel() {
-    // Navigate back to the ProfileComponent
     this.router.navigate(['/profile']);
   }
 
@@ -34,22 +32,21 @@ export class EditComponent {
       email: this.email
     };
 
-    this.http.put<any>(`${apiUrl}${updateProfileEndpoint}`, updatedProfile)
-    .subscribe(
-      response => {
-        // Handle success
-        console.log('Profile updated successfully:', response);
 
-        // Update the user data in the AuthService
-        this.authService.updateUserProfile(response.username, response.email);
+    this.userService.updateUserProfile(updatedProfile)
+      .subscribe(
+        response => {
+          console.log('Profile updated successfully:', response);
+          this.router.navigate(['/profile']);
+          // Optional: Provide a success message to the user
+          alert('Profile updated successfully!');
+        },
+        error => {
+          console.error('Profile update failed:', error);
+          // Optional: Provide an error message to the user
+          alert('Failed to update profile. Please try again.');
+        }
+      );
+  }
+}
 
-        // Navigate back to the profile page
-        this.router.navigate(['/profile']);
-      },
-      error => {
-        // Handle error
-        console.error('Profile update failed:', error);
-      }
-    );
-}
-}
