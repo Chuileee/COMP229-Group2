@@ -15,7 +15,7 @@ import { FooterComponent } from './partials/footer/footer.component';
 import { AnalysisComponent } from './analysis/analysis.component';
 import { SurveyListComponent } from './survey-list/survey-list.component';
 import { SurveyResponseComponent } from './survey-response/survey-response.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -39,7 +39,8 @@ import { SurveyResponseComponent } from './survey-response/survey-response.compo
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

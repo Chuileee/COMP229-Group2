@@ -28,6 +28,7 @@
       <select class="form-control" [id]="'questiontype' + i" [(ngModel)]="question.questiontype" [name]="'questiontype' + i" required>
         <option value="multipleChoice">Multiple Choice</option>
         <option value="agreeDisagree">Agree/Disagree</option>
+        <option value="freeText">Free Text</option>
       </select>
       <br>
       <div *ngIf="question.questiontype === 'multipleChoice'">
@@ -35,6 +36,14 @@
         <input type="text" class="form-control" [id]="'options' + i" [(ngModel)]="question.optionsString" [name]="'options' + i" placeholder="Option1, Option2, Option3, ...">
         <small class="form-text text-muted">Enter options separated by commas.</small>
       </div>
+
+      <div *ngIf="question.questiontype === 'freeText'">
+        <label for="freeText{{ i }}">Response</label>
+        <textarea class="form-control" [id]="'freeText' + i"></textarea>
+        <small class="form-text text-muted">User will fill their response here.</small>
+      </div>
+
+      <button type="button" (click)="deleteQuestion(i)" class="btn btn-danger">Delete Question</button>
       <hr>
     </div>
 

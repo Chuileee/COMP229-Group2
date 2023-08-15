@@ -1,4 +1,5 @@
 var surveyModel = require('./surveyModel');
+var surveyResponseModel = require('./surveyResponseModel');
 
 module.exports.saveSurveyService = (surveyDetails) => {
     return new Promise(function saveSurveyFun(resolve, reject){
@@ -33,3 +34,21 @@ module.exports.getAllSurveysService = () => {
     });
 };
 
+module.exports.saveSurveyResponseService = (responseDetails) => {
+    return new Promise(function saveSurveyResponseFun(resolve, reject){
+        var surveyResponseData = new surveyResponseModel(responseDetails);
+
+        console.log("Saving the following response:", surveyResponseData);
+
+        surveyResponseData.save(function resultHandle(error, result){
+            if(error){
+                console.error("Error while saving response to MongoDB:", error.message);
+                reject(error);
+            } else {
+                console.log("Saved survey response successfully:", result);
+                resolve(true);
+            }
+        });
+        
+    });
+}
