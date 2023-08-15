@@ -14,6 +14,8 @@ router.use((req, res, next) => {
 router.post('/signup', userController.saveUserInfoController);
 router.post('/login', userController.loginUserInfoController);
 router.post('/profile', userController.getUserInfoController);
+router.put('/update-profile', userController.updateUserProfileController);
+
 
 // Update user profile
 router.put('/update-profile', userController.updateUserProfileController);
