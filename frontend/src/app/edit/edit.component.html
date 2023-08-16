@@ -1,6 +1,10 @@
-<h2>Edit Profile</h2>
-<form (ngSubmit)="submitForm()" #profileForm="ngForm">
-    <div class="form-group">
+<div class="container mt-5">
+  <div class="card">
+      <div class="card-header">
+        <h2>Edit Profile</h2>
+      </div>
+        <form (ngSubmit)="submitForm()" #profileForm="ngForm">
+      <div class="form-group">
         <input type="text" [(ngModel)]="username" name="username" class="form-control" placeholder="Enter username" required>
         <div *ngIf="profileForm.submitted && !profileForm.controls['username']?.valid" class="text-danger">
           Username is required.
@@ -15,7 +19,7 @@
     </div>
 
     <div>
-        <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
         <button class="btn btn-primary" type="submit">Submit</button>
+        <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
     </div>
 </form>
