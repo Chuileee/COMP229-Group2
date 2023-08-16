@@ -1,50 +1,18 @@
-<div class="container mt-4">
-    <h1 class="display-4 text-center mb-5">Survey List</h1>
-    
-    <ng-container *ngIf="surveys.length > 0; else noSurveys">
-        <div class="card mb-4 shadow" *ngFor="let survey of surveys">
-            <div class="card-header bg-primary text-white">
-                <h4 class="card-title mb-0">{{ survey.surveyName }}</h4>
-            </div>
-            
-            <div class="card-body">
-                <!-- Survey date range -->
-                <p class="text-muted" *ngIf="survey.startDate && survey.endDate">
-                    <i class="fa fa-calendar-alt"></i>
-                    From {{ survey.startDate }} to {{ survey.endDate }}
-                </p>
-                
-                <hr>
+<p>Survey List</p>
 
-                <!-- Questions list -->
-                <div *ngFor="let question of survey.questions">
-                    <h5 class="mt-3"><strong>Question:</strong> {{ question.text }}</h5>
-                    <p class="mb-3">
-                        <span class="badge badge-light" *ngIf="question.questiontype === 'multipleChoice'">Multiple Choice</span>
-                        <span class="badge badge-dark" *ngIf="question.questiontype === 'agreeDisagree'">Agree/Disagree</span>
-                    </p>
+<div *ngFor="let survey of surveys">
+  <h3>{{ survey.surveyName }}</h3>
+  
+  <div *ngFor="let question of survey.questions">
+    <p><strong>Question:</strong> {{ question.text }}</p>
+    <p><strong>Type:</strong> {{ question.questiontype }}</p>
+    <div *ngIf="question.questiontype === 'multipleChoice'">
+      <p><strong>Options:</strong></p>
+      <ul>
+        <li *ngFor="let option of question.options">{{ option }}</li>
+      </ul>
+    </div>
+  </div>
 
-                    <div *ngIf="question.questiontype === 'multipleChoice'">
-                        <h6>Options:</h6>
-                        <ul class="mb-4">
-                            <li *ngFor="let option of question.options">{{ option }}</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-footer text-center">
-                <!-- Respond button -->
-                <button class="btn btn-success" (click)="respondToSurvey(survey)">Respond to Survey</button>
-
-            </div>
-        </div>
-    </ng-container>
-    
-    <!-- Empty state -->
-    <ng-template #noSurveys>
-        <div class="alert alert-info text-center">
-            No surveys available at the moment.
-        </div>
-    </ng-template>
+  <hr>
 </div>
