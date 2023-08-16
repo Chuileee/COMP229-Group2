@@ -1,10 +1,19 @@
 <h1>My Surveys</h1>
 
-<ul *ngIf="surveys.length">
+<!-- Loading Message -->
+<p *ngIf="isLoading">Loading surveys...</p>
+
+<!-- List of Surveys -->
+<ul *ngIf="surveys.length && !isLoading">
   <li *ngFor="let survey of surveys">
     {{ survey.surveyName }}
     <!-- Add more survey details or links/buttons for editing, viewing, etc. -->
   </li>
 </ul>
 
-<p *ngIf="!surveys.length">No surveys found.</p>
+<!-- Empty State: No Surveys -->
+<p *ngIf="!isLoading && surveys.length === 0">You haven't created any surveys yet.</p>
+
+<!-- Error Message -->
+<p *ngIf="errorMessage">{{ errorMessage }}</p>
+

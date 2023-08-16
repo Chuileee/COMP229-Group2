@@ -45,7 +45,7 @@ export class SurveyService {
   getMySurveys(): Observable<any> {
     const userEmail = this.authService.getEmail();
     if (userEmail) {
-        return this.http.get(`${this.baseUrl}/api/mysurveys?email=${userEmail}`);
+      return this.http.get(`${this.baseUrl}/my-Surveys`);
     } else {
         return of([]);  // Return an empty array if there's no logged-in user
     }
