@@ -1,72 +1,69 @@
 <div class="container mt-5">
-    <h2 class="text-center mb-5">Respond to Survey</h2>
-  
-    <!-- Check if the survey data is loaded -->
-    <div *ngIf="survey">
-  
-      <div class="card mb-4">
-        <div class="card-header">
-          <h3>{{ survey.surveyName }}</h3>
-        </div>
-  
+  <h2 class="text-center mb-5">Respond to Survey</h2>
+
+  <!-- Loaded survey data -->
+  <ng-container *ngIf="survey">
+    <div class="card mb-4">
+      <div class="card-header">
+        <h3>{{ survey.surveyName }}</h3>
+      </div>
+
+      <form [formGroup]="responseForm" (ngSubmit)="submitResponses()">
         <div class="card-body">
-  
           <!-- Loop through each question in the survey -->
-          <div *ngFor="let question of survey.questions">
-            
+          <div *ngFor="let question of survey.questions; let idx = index">
+
             <!-- Display question text -->
             <p class="mt-3">{{ question.text }}</p>
-            
-            <!-- If the question type is multipleChoice, display options as radio buttons -->
+
+            <!-- Multiple Choice options -->
             <div *ngIf="question.questiontype === 'multipleChoice'">
-              <div class="form-check" *ngFor="let option of question.options">
-                <input class="form-check-input" type="radio" 
-                       name="{{ question.text }}" id="{{ option }}" 
-                       value="{{ option }}" 
-                       [(ngModel)]="responses[question.text]">
-                <label class="form-check-label" for="{{ option }}">
+              <div class="form-check" *ngFor="let option of question.options; let i = index">
+                <input class="form-check-input" type="radio" id="option{{ idx }}_{{ i }}"
+                       formControlName="response{{ idx }}"
+                       [value]="option">
+                <label class="form-check-label" for="option{{ idx }}_{{ i }}">
                   {{ option }}
                 </label>
               </div>
             </div>
-            
-  
-            <!-- If the question type is agreeDisagree, display options as radio buttons -->
+
+            <!-- Agree/Disagree options -->
             <div *ngIf="question.questiontype === 'agreeDisagree'">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" 
-                       name="{{ question.text }}" id="agree" 
-                       value="Agree"
-                       [(ngModel)]="responses[question.text]">
-                <label class="form-check-label" for="agree">
-                  Agree
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" 
-                       name="{{ question.text }}" id="disagree" 
-                       value="Disagree"
-                       [(ngModel)]="responses[question.text]">
-                <label class="form-check-label" for="disagree">
-                  Disagree
-                </label>
-              </div>
+              <ng-container *ngFor="let option of ['Agree', 'Disagree']; let i = index">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" id="option{{ idx }}_{{ i }}"
+                         formControlName="response{{ idx }}"
+                         [value]="option">
+                  <label class="form-check-label" for="option{{ idx }}_{{ i }}">
+                    {{ option }}
+                  </label>
+                </div>
+              </ng-container>
             </div>
-            
-  
-          <!-- Submit button to submit responses -->
-          <button class="btn btn-primary mt-4" (click)="submitResponses()">Submit Responses</button>
+
+            <!-- Free text area -->
+            <div *ngIf="question.questiontype === 'freeText'">
+              <textarea class="form-control" rows="4"
+                        formControlName="response{{ idx }}"
+                        placeholder="Enter your response here"></textarea>
+            </div>
+          </div>
         </div>
-      </div>
-  
+
+        <!-- Submit button -->
+        <div class="card-footer text-right">
+          <button type="submit" class="btn btn-primary" [disabled]="!responseForm.valid">Submit Responses</button>
+        </div>
+      </form>
     </div>
-  
-    <!-- If the survey data hasn't loaded, display a loading message or any other placeholder -->
-    <div *ngIf="!survey">
-      <p>Loading survey...</p>
-    </div>
+  </ng-container>
+
+  <!-- Loading or no data placeholder -->
+  <div *ngIf="!survey">
+    <p>Loading survey...</p>
   </div>
 
-  <pre>{{ responses | json }}</pre>
-
-  
+  <!-- Optional: Display responses (for debugging or review) -->
+  <pre *ngIf="survey">{{ responseForm.value | json }}</pre>
+</div>

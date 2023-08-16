@@ -1,22 +1,46 @@
 import { Injectable } from '@angular/core';
-import { Survey } from './survey/survey.model';  // Adjust the path to your Survey model
+import { Survey } from './survey/survey.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class SurveyService {
 
-  private surveys: Survey[] = [];  // This array will act as our database for surveys for this example
+  constructor(private http: HttpClient) {}
 
-  constructor() {}
+  // Endpoint base URL
+  private baseUrl: string = 'http://localhost:4000';
 
-  // Save a survey
-  saveSurvey(survey: Survey) {
-    this.surveys.push(survey);
+// Save a survey
+saveSurvey(survey: Survey) {
+  // Endpoint where your backend server is running
+  const endpoint = `${this.baseUrl}/survey`;
+  // Use the HTTP client to send the survey data as a POST request to your backend server
+  return this.http.post(endpoint, survey);
+}
+
+  // Fetch a specific survey by its _id
+  getSurveyById(id: string): Observable<Survey> {
+    const endpoint = `${this.baseUrl}/survey/${id}`;
+    return this.http.get<Survey>(endpoint);
   }
 
-  // Get all surveys
-  getAllSurveys(): Survey[] {
-    return this.surveys;
+  getAllSurveys(): Observable<any[]> {
+    const endpoint = `${this.baseUrl}/allSurveys`; // Use the correct endpoint URL
+    return this.http.get<any[]>(endpoint); // Use the 'endpoint' variable
   }
+
+  submitSurveyResponse(surveyId: string, response: any): Observable<any> {
+    const endpoint = `${this.baseUrl}/submitResponse`; 
+    // Assuming '/submitResponse' is the backend endpoint for submitting responses. If not, replace with the actual endpoint.
+    const payload = {
+      surveyId: surveyId,
+      responses: response
+    };
+    return this.http.post(endpoint, payload);
+  }
+  
 }

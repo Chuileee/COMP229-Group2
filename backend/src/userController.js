@@ -47,4 +47,32 @@ var getUserInfoController = async(req, res) => {
     }
 };
 
-module.exports = { saveUserInfoController, loginUserInfoController, getUserInfoController }
+var updateUserProfileController = async (req, res) => {
+    try {
+      console.log("Received update profile request with body:", req.body);
+  
+      const userEmail = req.body.email; 
+      const updateData = {
+        username: req.body.username,
+        email: req.body.email
+      };
+  
+      const status = await userService.updateUserProfileService(userEmail, updateData);
+  
+      if (status) {
+        res.send({ status: true, message: "Profile updated Successfully." });
+      } else {
+        res.send({ status: false, message: "Error in updating profile." });
+      }
+    } catch (error) {
+      console.error("Error updating user profile:", error);
+      res.send({ status: false, message: error.message });
+    }
+  };
+
+  module.exports = {
+    saveUserInfoController,
+    loginUserInfoController,
+    getUserInfoController,
+    updateUserProfileController
+  };
