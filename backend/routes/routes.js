@@ -21,6 +21,5 @@ router.post('/survey', surveyController.saveSurveyController);
 router.get('/allSurveys', surveyController.getAllSurveysController);
 router.get('/survey/:id', surveyController.getSurveyByIdController);
 router.post('/submitResponse', surveyController.saveSurveyResponseController);
-router.get('/my-Surveys', surveyController.getSurveysByEmailController);
 
 module.exports = router;

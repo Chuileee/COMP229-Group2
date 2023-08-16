@@ -1,23 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Survey } from './survey/survey.model';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';  // Add 'of' import here
-import { AuthService } from './auth.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class SurveyService {
+
+  constructor(private http: HttpClient) {}
+
   // Endpoint base URL
   private baseUrl: string = 'http://localhost:4000';
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
-
-  // Save a survey
-  saveSurvey(survey: Survey) {
-    const endpoint = `${this.baseUrl}/survey`;
-    return this.http.post(endpoint, survey);
-  }
+// Save a survey
+saveSurvey(survey: Survey) {
+  // Endpoint where your backend server is running
+  const endpoint = `${this.baseUrl}/survey`;
+  // Use the HTTP client to send the survey data as a POST request to your backend server
+  return this.http.post(endpoint, survey);
+}
 
   // Fetch a specific survey by its _id
   getSurveyById(id: string): Observable<Survey> {
@@ -25,29 +28,19 @@ export class SurveyService {
     return this.http.get<Survey>(endpoint);
   }
 
-  // Fetch all surveys
   getAllSurveys(): Observable<any[]> {
-    const endpoint = `${this.baseUrl}/allSurveys`;
-    return this.http.get<any[]>(endpoint);
+    const endpoint = `${this.baseUrl}/allSurveys`; // Use the correct endpoint URL
+    return this.http.get<any[]>(endpoint); // Use the 'endpoint' variable
   }
 
-  // Submit a survey response
   submitSurveyResponse(surveyId: string, response: any): Observable<any> {
-    const endpoint = `${this.baseUrl}/submitResponse`;
+    const endpoint = `${this.baseUrl}/submitResponse`; 
+    // Assuming '/submitResponse' is the backend endpoint for submitting responses. If not, replace with the actual endpoint.
     const payload = {
       surveyId: surveyId,
       responses: response
     };
     return this.http.post(endpoint, payload);
   }
-
-  // Fetch surveys created by the currently logged-in user
-  getMySurveys(): Observable<any> {
-    const userEmail = this.authService.getEmail();
-    if (userEmail) {
-      return this.http.get(`${this.baseUrl}/my-Surveys`);
-    } else {
-        return of([]);  // Return an empty array if there's no logged-in user
-    }
-  }
+  
 }

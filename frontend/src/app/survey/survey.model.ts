@@ -11,6 +11,5 @@ export interface Question {
     questions: Question[];//questions: any[]; //Consider creating a Question model for better type safety
     startDate: string;
     endDate: string;
-    createdBy?: string;
   }
   

@@ -11,15 +11,7 @@ export class AuthService {
   // Store the user data (adjust the type if necessary)
   private currentUser: { email: string, username: string } | null = null;
 
-  constructor(private router: Router) {
-    const email = localStorage.getItem('email');
-    const username = localStorage.getItem('username');
-    if (email && username) {
-      this.currentUser = { email: email, username: username };
-      this.isLogin = true;
-    }
-  }
-  
+  constructor(private router: Router) {}
 
   login(email: string, username: string): void {
     this.isLogin = true;

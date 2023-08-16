@@ -16,7 +16,6 @@ import { AnalysisComponent } from './analysis/analysis.component';
 import { SurveyListComponent } from './survey-list/survey-list.component';
 import { SurveyResponseComponent } from './survey-response/survey-response.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MySurveysComponent } from './my-surveys/my-surveys.component';
 
 
 @NgModule({
@@ -32,8 +31,7 @@ import { MySurveysComponent } from './my-surveys/my-surveys.component';
     SurveyListComponent,
     SurveyComponent,
     AnalysisComponent,
-    SurveyResponseComponent,
-    MySurveysComponent
+    SurveyResponseComponent
 
 
   ],

@@ -10,10 +10,8 @@ var questionSchema = new Schema({
 var surveySchema = new Schema({
     surveyName: String,
     questions: [questionSchema],
-    createdBy: String,
-    creatorEmail: String,
     startDate: String,
     endDate: String
 }, { collection: "surveys" });
 
-module.exports = mongoose.model('Survey', surveySchema, 'surveys');
+module.exports = mongoose.model('Survey', surveySchema);

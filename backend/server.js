@@ -16,7 +16,6 @@ app.use(express.json());
 // Add routes middleware
 app.use('/', routes);
 
-
 //connect to MongoDB
 mongoose.set("strictQuery", false);
 mongoose.connect("mongodb://127.0.0.1:27017/survey", { useNewUrlParser: true, useUnifiedTopology: true }, function checkMongoDBconnection(error) {

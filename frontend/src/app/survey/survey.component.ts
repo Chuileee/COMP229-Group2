@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Survey, Question } from './survey.model';
 import { Router } from '@angular/router';
 import { SurveyService } from '../survey.service';
-import { AuthService } from '../auth.service'; 
 
 @Component({
   selector: 'app-survey',
@@ -18,7 +17,7 @@ export class SurveyComponent {
     endDate: ''
   };
 
-  constructor(private surveyService: SurveyService, private router: Router, private authService: AuthService) {}
+  constructor(private surveyService: SurveyService, private router: Router) {}
 
   ngOnInit() {
     this.addQuestion();
@@ -33,7 +32,7 @@ export class SurveyComponent {
     }
     this.survey.questions.push(newQuestion);
   }
-
+  
   deleteQuestion(index: number) {
     this.survey.questions.splice(index, 1);
   }
@@ -45,33 +44,30 @@ export class SurveyComponent {
     return optionString.split(',').map(option => option.trim());
   }
 
-
-// Create and save the survey
-createSurvey() {
-  this.survey.questions.forEach(question => {
+  // Create and save the survey
+  createSurvey() {
+    this.survey.questions.forEach(question => {
       if (question.questiontype === 'multipleChoice' && question.optionsString) {
-          question.options = this.setOptionsFromString(question.optionsString);
+        question.options = this.setOptionsFromString(question.optionsString);
       }
-  });
+    });
 
-  const userEmail = this.authService.getEmail();
-  const newSurvey: Survey = {
+    const newSurvey: Survey = {
       _id: '',
       surveyName: this.survey.surveyName,
-      createdBy: userEmail !== null ? userEmail : undefined,
       questions: this.survey.questions,
       startDate: this.survey.startDate,
       endDate: this.survey.endDate
-  };
+    };
 
-  this.surveyService.saveSurvey(newSurvey).subscribe(
+    this.surveyService.saveSurvey(newSurvey).subscribe(
       response => {
-          console.log('Survey saved:', response);
-          this.router.navigateByUrl('/survey-list');  // Navigate after saving.
+        console.log('Survey saved:', response);
+        this.router.navigateByUrl('/survey-list');  // Navigate after saving.
       },
       error => {
-          console.error('Error saving survey:', error);
+        console.error('Error saving survey:', error);
       }
-  );
-}
+    );
+  }
 }
