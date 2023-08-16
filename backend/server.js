@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 var routes = require('./routes/routes');
 const cors = require('cors');
 
-// Allow cross-origin requests
 app.use(cors({
     origin: "http://localhost:4200"
 }));
