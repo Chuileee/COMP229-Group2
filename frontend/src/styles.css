@@ -1,13 +1,16 @@
-/* Reset default margin and padding */
-body, h1, h2, h3, p, ul, li {
-  margin: 0;
-  padding: 0;
-}
-
 /* Set default font and background color */
 body {
   font-family: Arial, sans-serif;
   background-color: #f5f5f5;
+  background-image:linear-gradient(white,#9be7f8);
+  line-height: 1;
+  margin: 0 auto;
+  background-attachment: fixed;
+  font-family: Arial, Helvetica, sans-serif; 
+  display: block;
+  text-align: center;
+  color: rgb(80, 205, 255);
+
 }
 
 /* Header styles */
@@ -23,7 +26,7 @@ header {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-  background-color: #fff;
+  background-color: #e1f8fc;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -42,8 +45,6 @@ select {
 }
 
 /* Buttons */
-<<<<<<< Updated upstream
-=======
 .container .card .btn {
   margin-top: 15px;
   margin-left: 10px;
@@ -51,7 +52,6 @@ select {
 }
 
 
->>>>>>> Stashed changes
 .btn {
   display: inline-block;
   padding: 0.5rem 1rem;
@@ -76,8 +76,6 @@ select {
 }
 
 
-<<<<<<< Updated upstream
-=======
 button:active {
   transform: translateY(4px);
 }
@@ -86,5 +84,3 @@ button:active {
   padding: 10px;
   background-color: #f5f5f5;
 }
-
->>>>>>> Stashed changes
