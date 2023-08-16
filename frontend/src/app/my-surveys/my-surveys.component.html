@@ -1,0 +1,10 @@
+<h1>My Surveys</h1>
+
+<ul *ngIf="surveys.length">
+  <li *ngFor="let survey of surveys">
+    {{ survey.surveyName }}
+    <!-- Add more survey details or links/buttons for editing, viewing, etc. -->
+  </li>
+</ul>
+
+<p *ngIf="!surveys.length">No surveys found.</p>

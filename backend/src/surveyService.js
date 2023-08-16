@@ -1,9 +1,10 @@
 var surveyModel = require('./surveyModel');
 var surveyResponseModel = require('./surveyResponseModel');
 
-module.exports.saveSurveyService = (surveyDetails) => {
+module.exports.saveSurveyService = (surveyDetails, userEmail) => {
     return new Promise(function saveSurveyFun(resolve, reject){
-        var surveyModelData = new surveyModel(surveyDetails);  // you can pass the entire body if it aligns with your model
+        surveyDetails.createdBy = userEmail;  // Add the user's email to the survey details
+        var surveyModelData = new surveyModel(surveyDetails);
         console.log("Saving the following data:", surveyModelData);
 
         surveyModelData.save(function resultHandle(error, result){
@@ -18,9 +19,26 @@ module.exports.saveSurveyService = (surveyDetails) => {
         
     });
 }
+//for surveys by a specific user
+module.exports.getSurveysCreatedByUser = (userEmail) => {
+    return new Promise((resolve, reject) => {
+        surveyModel.find({ createdBy: userEmail }, (error, surveys) => {
+            if (error) {
+                console.error("Error fetching all surveys:", error.message);
+                reject(error);
+            } else {
+                console.log("Fetched all surveys successfully.");
+                resolve(surveys);
+            }
+        });
+    });
+};
 
+
+
+//for all surveys
 // Add more functions as required, e.g., to fetch all surveys, get a survey by ID, etc.
-module.exports.getAllSurveysService = () => {
+module.exports.getAllSurveys = () => {
     return new Promise((resolve, reject) => {
         surveyModel.find({}, (error, surveys) => {
             if (error) {
@@ -52,3 +70,17 @@ module.exports.saveSurveyResponseService = (responseDetails) => {
         
     });
 }
+
+module.exports.getSurveysByEmailService = (email) => {
+    return new Promise((resolve, reject) => {
+        surveyModel.find({ createdBy: email }, (error, surveys) => {
+            if (error) {
+                console.error("Error fetching surveys by email:", error.message);
+                reject(error);
+            } else {
+                console.log("Fetched surveys by email successfully.");
+                resolve(surveys);
+            }
+        });
+    });
+};

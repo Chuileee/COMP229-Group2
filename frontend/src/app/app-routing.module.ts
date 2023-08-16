@@ -9,6 +9,7 @@ import { SurveyComponent } from './survey/survey.component';
 import { SurveyListComponent } from './survey-list/survey-list.component';
 import { AnalysisComponent } from './analysis/analysis.component';
 import { SurveyResponseComponent } from './survey-response/survey-response.component';
+import { MySurveysComponent } from './my-surveys/my-surveys.component';
 
 const routes: Routes = [
   {path:'home', component:HomeComponent},
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path:'survey', component:SurveyComponent},
   {path:'survey-list', component:SurveyListComponent},
   {path:'analysis', component:AnalysisComponent},
-  {path:'respond/:id', component: SurveyResponseComponent }
+  {path:'respond/:id', component: SurveyResponseComponent },
+  {path:'my-surveys', component: MySurveysComponent }
 ];
 
 @NgModule({
